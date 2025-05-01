@@ -1,0 +1,25 @@
+local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanOnly/ts/refs/heads/main/a"))()
+
+OrionLib:MakeNotification({
+	Name = "Nezy Notification",
+	Content = "Made by Nezy",
+	Image = "rbxassetid://7733960981",
+	Time = 4
+})
+
+wait(3)
+
+local gameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+
+local Window = OrionLib:MakeWindow({
+	Name = "Nezy | " .. gameName,
+	HidePremium = false,
+	SaveConfig = true,
+	ConfigFolder = "OrionTest"
+})
+
+local EventTab = Window:MakeTab({ 
+	Name = "Current Event", 
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
