@@ -1,25 +1,27 @@
-local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/KaanOnly/ts/refs/heads/main/a"))()
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Consistt/Ui/main/UnLeaked"))()
 
-OrionLib:MakeNotification({
-	Name = "Nezy Notification",
-	Content = "Made by Nezy",
-	Image = "rbxassetid://7733960981",
-	Time = 4
-})
+local username = library:GetUsername()
+local owners = { Nezuurr = true, EfdoRB = true }
 
-wait(3)
+library.rank = owners[username] and "owner" or "member"
 
 local gameName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+library.title = "Nezy | " .. gameName
 
-local Window = OrionLib:MakeWindow({
-	Name = "Nezy | " .. gameName,
-	HidePremium = false,
-	SaveConfig = true,
-	ConfigFolder = "OrionTest"
-})
+local Wm = library:Watermark("Nezy UI | v" .. library.version .. " | " .. username .. " | rank: " .. library.rank)
+local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
+coroutine.wrap(function()
+    while wait(0.75) do
+        FpsWm:Text("fps: " .. library.fps)
+    end
+end)()
 
-local EventTab = Window:MakeTab({ 
-	Name = "Current Event", 
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-})
+local Notif = library:InitNotifications()
+Notif:Notify("Made by Nezy", 3, "success")
+
+library:Introduction()
+wait(1)
+local Init = library:Init()
+
+local EventTab = Init:NewTab("Current Event")
+local EventSection = EventTab:NewSection("Event")
